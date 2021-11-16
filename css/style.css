@@ -1,0 +1,166 @@
+/* GENERAL RESET */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;}
+
+body {
+    height: 100vh;
+    background-image: linear-gradient(
+        to bottom,
+        #32a093 0%,
+        #32a093 20%,
+        #dfe0d9 20%,
+        #dfe0d9 100%
+    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* UTILITIES */
+.m-10 {
+    margin-right: 10px;
+}
+
+.fs-12 {
+    font-size: 12px;
+}
+
+.h-50 {
+    height: 50px;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.p-10 {
+    padding: 10px;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.d-grow {
+    flex-grow: 1;
+}
+
+.container {
+    width: 70%;
+    min-width: 900px;
+    height: 95%;
+    background: #fff;
+    display: flex;
+}
+
+.container-sidebar {
+    display: flex;
+    height: 100%;   
+    flex-direction: column;
+
+}
+
+.struttura {
+    height: 50px;
+    display: flex;
+}
+
+.side-label {
+    display: flex;
+    align-items: center;
+}
+
+.side-label-style {
+    font-size: 8px;
+    line-height: 18px;
+}
+
+
+.left {
+    width: 40%;
+    height: 100%;
+    border-right: solid 1px #bababa;
+}
+
+.right {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.top {
+    height: 50px;
+    background-color:#ededed;
+    display: flex;
+    padding: 10px;
+}    
+
+.top-left {
+    flex-grow: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}    
+ 
+.icons {
+    color: #bababa;
+    align-content: center;
+    margin: 10px;
+}    
+
+.top-right {
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}    
+
+.nome-utente {
+    display: flex;
+    flex-direction: column;
+}    
+
+.style {
+    font-size: 10px;
+    color: #777e82;
+    margin-top: 4px;
+}    
+
+.top-right i {
+    margin: 10px
+}    
+
+main {
+    background-image: url(../img/mine.jpg);
+    display: flex;
+    flex-grow: 1;
+}    
+
+.avatar {
+    border-radius: 50%;
+    height: 100%;
+}    
+
+.footer {
+    height: 50px;
+    background-color:#ededed;
+    display: flex;
+    align-items: center;
+}    
+
+.footer i {
+    color: #777e82;
+    margin: 0 20px;
+}    
+
+.label {
+    height: 70%;
+    border-radius: 5px;
+    border: none;
+    font-size: 10px;
+    padding-left: 10px;
+}
