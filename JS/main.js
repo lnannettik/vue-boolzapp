@@ -95,10 +95,21 @@ const app = new Vue ({
                 ],
             },
         ],
+
+        activeContact: 0,
         
     },
 
-    methods: {},
+    methods: {
+
+        setActive(contactIndex) {
+            console.log(`sparati tu e ${contactIndex}`);
+
+            this.activeContact = contactIndex;
+        }
+
+
+    },
 
 });
 

@@ -44,7 +44,7 @@
             <div class="container-sidebar">
 
                 <!-- avviso azzurrino -->
-                <div class="avviso struttura p-10 w-100">
+                <div class="avviso p-10 w-100 d-flex h-50">
                     <div class="bell-container">
                         <i class="fas fa-bell-slash"></i>
                     </div>
@@ -72,9 +72,9 @@
                 <div class="contactList">
 
                     <!-- creo la lista con v-for -->
-                    <div v-for='contact in contacts' class="struttura p-10 w-100 al-it-c">
-                        <img 
-                            class="avatar m-10" 
+                    <div v-for='(contact, index) in contacts' @click="setActive(index)" class="contact p-10 w-100 al-it-c">
+                    <img 
+                    class="avatar m-10" 
                             :src="`./img/avatar${contact.avatar}.jpg`"
                             alt="Avatar">
 
@@ -108,18 +108,36 @@
                 </div>
             </div>
 
+
+
+
             <!-- Messages section -->
             <main>
+
                 <div class="receved message">
-                    <div class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut sequi quisquam animi atque excepturi harum labore, consequatur maxime minima minus vitae veritatis saepe? Totam eum consectetur cum veritatis sapiente ipsam.</div>
-                    <div class="time">10/20/2021, mercoledì papapapa</div>
+
+                    <div class="text-style">Lorem ipsum dolor sit</div>
+
+                    <div class="time"></div>
+
                 </div>
 
+
                 <div class="sent message">
-                    <div class="text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum excepturi dolorem vitae quidem aspernatur veritatis optio cumque, et nihil voluptas, necessitatibus expedita incidunt quod sunt consequuntur, tenetur dicta amet eos.</div>
+
+                    <div class="text-style">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</div>
+
                     <div class="time">10/20/2021, mercoledì papapapa</div>
-                </div>            
+
+                </div>    
+
             </main>
+
+
+
+
+
+
 
             <!-- Footer -->
             <footer class="footer">
