@@ -72,7 +72,12 @@
                 <div class="contactList">
 
                     <!-- creo la lista con v-for -->
-                    <div v-for='(contact, index) in contacts' @click="setActive(index)" class="contact p-10 w-100 al-it-c">
+                    <!-- setto il click come evento che rileva l'indice  -->
+                    <div v-for='(contact, index) in contacts' 
+                        @click="setActive(index)" 
+                        class="contact p-10 w-100 al-it-c"
+                        :class="{active: index === activeContact}">
+
                     <img 
                     class="avatar m-10" 
                             :src="`./img/avatar${contact.avatar}.jpg`"
@@ -89,18 +94,23 @@
 
         </aside>
 
+        
         <!-- right -->
         <section class="right">
 
             <!-- Top bar -->
             <div class="top">
+
                 <div class="top-left struttura">
-                    <img class="avatar m-10" src="./img/avatar_io.jpg" alt="My Avatar">
+                    <img class="avatar m-10" 
+                        :src="`./img/avatar${contacts[activeContact].avatar}.jpg`" 
+                        :alt="contacts[activeContact].name">
                     <div class="nome-utente">
-                        <span class="fs-12">Nome Cognome</span>
+                        <span class="fs-12">{{contacts[activeContact].name}}</span>
                         <span class="style">Ultimo accesso oggi alle 10.35</span>
                     </div>
                 </div>
+
                 <div class="top-right">
                     <i class="fas fa-search icons"></i>
                     <i class="fas fa-search icons"></i>
@@ -110,39 +120,37 @@
 
 
 
-
             <!-- Messages section -->
             <main>
+                <div class="message-container">
 
-                <div class="receved message">
+                    <!-- entro nell'array 'contacts' con v-for così da poter prendere i contenuti degli oggetti al suo interno  -->
 
-                    <div class="text-style">Lorem ipsum dolor sit</div>
+                    <!-- 'status' lo prendo attaccando il suo valore come fosse una classe con v-bind -->
 
-                    <div class="time"></div>
+                    <div v-for="message in contacts[activeContact].messages" 
+                        class="message" 
+                        :class="message.status">
+                        
+                        
 
+                        <div class="text-style">{{message.text}}</div>
+                        <div class="time">{{message.date}}</div>
+
+                    </div>    
                 </div>
-
-
-                <div class="sent message">
-
-                    <div class="text-style">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</div>
-
-                    <div class="time">10/20/2021, mercoledì papapapa</div>
-
-                </div>    
-
             </main>
-
-
-
-
 
 
 
             <!-- Footer -->
             <footer class="footer">
                 <i class="fas fa-search icons"></i>
-                <input type="label" placeholder="Scrivi il tuo messaggio" class="label d-grow">
+                <input type="label" 
+                    placeholder="Scrivi il tuo messaggio" 
+                    class="label d-grow"
+                    v-model.trim="newMessage"
+                    @keyup.enter="addNew">
                 <i class="fas fa-search icons"></i>
 
             </footer>
@@ -151,6 +159,10 @@
 
     </div>
 
+    <!-- DayJS -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.7/dayjs.min.js"></script>
+
+    <!-- JS -->
     <script src="./JS/main.js"></script>
 </body>
 
