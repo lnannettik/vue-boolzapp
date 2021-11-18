@@ -94,7 +94,7 @@
 
         </aside>
 
-        
+
         <!-- right -->
         <section class="right">
 
@@ -145,12 +145,16 @@
 
             <!-- Footer -->
             <footer class="footer">
+
                 <i class="fas fa-search icons"></i>
+                
                 <input type="label" 
                     placeholder="Scrivi il tuo messaggio" 
                     class="label d-grow"
                     v-model.trim="newMessage"
-                    @keyup.enter="addNew">
+                    @keyup.enter="addNew"
+                >
+
                 <i class="fas fa-search icons"></i>
 
             </footer>

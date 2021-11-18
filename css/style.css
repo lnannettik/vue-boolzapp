@@ -268,7 +268,7 @@ main {
 /* FOOTER */
 
 .footer {
-    height: 50px;
+    min-height: 50px;
     background-color:#ededed;
     display: flex;
     align-items: center;

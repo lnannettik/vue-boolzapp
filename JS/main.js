@@ -28,7 +28,7 @@ const app = new Vue ({
                     },
                     {
                         date: '10/01/2020 16:15:22',
-                        text: 'Tutto fatto!',
+                        text: 'Sto Tutto fatto!',
                         status: 'received'
                     }
                 ],
@@ -122,10 +122,22 @@ const app = new Vue ({
                 })
 
                 this.newMessage = '';
+
+
+                // risposta automatica dopo 1 secondo
+        
+                setTimeout(() => {
+                    this.contacts[this.activeContact].messages.push({
+                        date: dayjs().format('DD/MM/YYYY HH:mm:ss'),
+                        text: 'Bella',
+                        status: 'received'  
+                    });
+
+                }, 1000);
             }
         },
 
-
+        
     },
 
 });
