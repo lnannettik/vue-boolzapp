@@ -97,6 +97,7 @@ const app = new Vue ({
         ],
 
         activeContact: 0,
+        newMessage: '',
         
     },
 
@@ -106,7 +107,23 @@ const app = new Vue ({
             console.log(`sparati tu e ${contactIndex}`);
 
             this.activeContact = contactIndex;
-        }
+        },
+
+
+        // creo aggiungo un nuovo elemento (con date, text e status: 'sent') all'array messages del contact attivo con push. Il valore di text sarà 'newMessage'. 
+
+        addNew() {
+            if(this.newMessage !== '') {
+
+                this.contacts[this.activeContact].messages.push({
+                    date: dayjs().format('DD/MM/YYYY HH:mm:ss'),
+                    text: this.newMessage,
+                    status: 'sent'  
+                })
+
+                this.newMessage = '';
+            }
+        },
 
 
     },

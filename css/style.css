@@ -174,7 +174,7 @@ body {
     background-color: #ededed;
 }
 
-.contactList .contact .active:active {
+.contactList .contact:focus {
     background-color: #ededed;
 }
 
@@ -227,6 +227,11 @@ main {
     padding: 50px;
 }    
 
+.message-container {
+    display: flex;
+    flex-direction: column;
+}
+
 .message {
     padding: 10px;
     border-radius: 5px;
@@ -248,7 +253,7 @@ main {
     align-self: flex-end;
 }
 
-.receved {
+.received {
     align-self: flex-start;
     background-color: white;
 }
