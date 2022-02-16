@@ -6,8 +6,8 @@ const app = new Vue ({
     data: {
         contacts: [
             {
-                name: 'Luca Nannetti',
-                avatar: '_1',
+                name: 'Clara',
+                avatar: '_9',
                 visible: true,
                 messages: [
                     {
@@ -58,17 +58,17 @@ const app = new Vue ({
                 messages: [
                     {
                         date: '28/03/2020 10:10:40',
-                        text: 'La Marianna va in campagna',
+                        text: 'Io sono Pdor!',
                         status: 'received'
                     },
                     {
                         date: '28/03/2020 10:20:10',
-                        text: 'Sicuro di non aver sbagliato chat?',
+                        text: 'Figlio di Kmer!',
                         status: 'sent'
                     },
                     {
                         date: '28/03/2020 16:15:22',
-                        text: 'Ah scusa!',
+                        text: 'Della tribù di Istarr!',
                         status: 'received'
                     }
                 ],
