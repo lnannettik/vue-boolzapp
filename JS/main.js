@@ -4,15 +4,9 @@ console.log(`JS OK`);
 const app = new Vue ({
     el: '#app',
     data: {
-        user: {
-            name: 'Luca Nannetti',
-            avatar: '_io',
-            img: "./img/avatar_io.jpg",
-        },
-    
         contacts: [
             {
-                name: 'Michele',
+                name: 'Luca Nannetti',
                 avatar: '_1',
                 visible: true,
                 messages: [
@@ -28,11 +22,12 @@ const app = new Vue ({
                     },
                     {
                         date: '10/01/2020 16:15:22',
-                        text: 'Sto Tutto fatto!',
+                        text: 'Sto tutto fatto!',
                         status: 'received'
                     }
                 ],
             },
+
             {
                 name: 'Fabio',
                 avatar: '_2',
@@ -54,7 +49,8 @@ const app = new Vue ({
                         status: 'sent'
                     }
                 ],
-            },    
+            },  
+
             {
                 name: 'Samuele',
                 avatar: '_3',
@@ -77,6 +73,7 @@ const app = new Vue ({
                     }
                 ],
             },
+
             {
                 name: 'Luisa',
                 avatar: '_4',
@@ -96,52 +93,57 @@ const app = new Vue ({
             },
         ],
 
-        activeContact: 0,
-        newMessage: '',
-        
-    },
+        activeIndex: 0,
+        newMessageText: '',
+        searchInput: '',
+        answers: [
+            "oh",
+            "Prontoooo",
+            "Ce la fai???",
+            "Va beh ciao",
+        ],
+
+    },    
 
     methods: {
 
-        setActive(contactIndex) {
-            console.log(`sparati tu e ${contactIndex}`);
+        // nuovo meassaggio risposta 1 sec
 
-            this.activeContact = contactIndex;
-        },
-
-
-        // creo aggiungo un nuovo elemento (con date, text e status: 'sent') all'array messages del contact attivo con push. Il valore di text sarà 'newMessage'. 
-
-        addNew() {
-            if(this.newMessage !== '') {
-
-                this.contacts[this.activeContact].messages.push({
-                    date: dayjs().format('DD/MM/YYYY HH:mm:ss'),
-                    text: this.newMessage,
-                    status: 'sent'  
-                })
-
-                this.newMessage = '';
-
-
-                // risposta automatica dopo 1 secondo
-        
+        addNewMessage() {
+            if (this.newMessageText !== '') {
+                this.contacts[this.activeIndex].messages.push(
+                    {
+                        date: dayjs().format('DD/MM/YYYY hh:mm:ss'),
+                        text: this.newMessageText,
+                        status: 'sent',
+                    }
+                );
+                this.newMessageText = '';
+                const randIndexAnswer =  Math.floor(Math.random() * (this.answers.length));
                 setTimeout(() => {
-                    this.contacts[this.activeContact].messages.push({
-                        date: dayjs().format('DD/MM/YYYY HH:mm:ss'),
-                        text: 'Bella',
-                        status: 'received'  
-                    });
-
-                }, 1000);
+                    this.contacts[this.activeIndex].messages.push(
+                        {
+                            date: dayjs().format('DD/MM/YYYY hh:mm:ss'),
+                            text: this.answers[randIndexAnswer],
+                            status: 'received',
+                        }
+                    );
+                }, 1000)
             }
         },
 
-        
-    },
 
-});
+        // filtro ricerca utenti
 
-
-
-
+        filterContacts() {
+            const searchInput = this.searchInput.toLowerCase();
+            this.contacts.forEach(el => {
+                if (!el.name.toLowerCase().includes(searchInput)) {
+                    el.visible = false;
+                } else {
+                    el.visible = true
+                }                
+            })
+        }
+    }
+})

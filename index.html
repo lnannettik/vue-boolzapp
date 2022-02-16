@@ -4,172 +4,124 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- FONT FAMILY - LATO -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet"> 
-<!-- FONT AWESOME -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900& display=swap" rel="stylesheet">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css' integrity='sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==' crossorigin='anonymous'/>
-<!-- MAIN STYLE -->
-    <link rel="stylesheet" href="./css/style.css">
-<!-- VueJS -->
+    <link rel="stylesheet" href="./css/main.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <title>Boolzapp Milestone 1</title>
+    <title>Boolzapp</title>
 </head>
-
-<body class="body">
-    
-    <div id="app" class="container">
-        <!-- left -->
-        <aside class="left">
-
-            <header>
-                <div class="top">
-                    <div class="top-left">
-                        <img class="avatar m-10" :src="user.img" alt="My Avatar">
-                        <div class="nome">
-                            <span class="fs-12">{{user.name}}</span>
-                        </div>
-    
-                    </div>
-                    <div class="top-right">
-                        <i class="fas fa-search icons"></i>
-                        <i class="fas fa-search icons"></i>
-                        <i class="fas fa-ellipsis-v icons"></i>
-                    </div>
+<body class="d-flex justify-content-center align-items-center">
+    <!-- APP -->
+    <section id="app" class="container d-flex">
+        <!-- ASIDE -->
+        <aside class="flex-column overflow-auto">
+            <!-- header user -->
+            <section class="header d-flex">
+                <div class="userID d-flex align-items-center">
+                    <img src="./img/avatar_io.jpg" alt="user" class="contact">
+                    <span class="user-name">Nome Utente</span>
                 </div>
-            </header>
-
-
-            <div class="container-sidebar">
-
-                <!-- avviso azzurrino -->
-                <div class="avviso p-10 w-100 d-flex h-50">
-                    <div class="bell-container">
-                        <i class="fas fa-bell-slash"></i>
-                    </div>
-                    <div class="nome-utente">
-                        <span class="fs-12">Ricevi notifiche di nuovi messaggi</span>
-                        <span class="style avviso-style">Attiva le notifiche</span>
-                    </div>
+                <div class="actions flex-grow-1 d-flex align-items-center justify-content-end">
+                    <button class="btn">
+                        <i class="fas fa-circle-notch refresh"></i>
+                    </button>
+                    <button class="btn">
+                        <i class="fas fa-comment-alt message"></i>
+                    </button>
+                    <button class="btn">
+                        <i class="fas fa-ellipsis-v expand-actions"></i>
+                    </button>
                 </div>
+            </section>
 
-                <!-- spazio ricerca -->
-                <div class="side-label">
-                    <div class="search-container d-flex">
-                        <i class="fas fa-search icons fs-small"></i>
-                    </div>
-                    <div class="label-container d-flex d-grow">
-                        <input 
-                        type="label" 
-                        placeholder="Cerca o inizia una nuova chat"
-                        class="side-label-style d-grow">
-                    </div>
+            <!-- notifications -->
+            <section class="notifications d-flex align-items-center">
+                <i class="fas fa-bell-slash"></i>
+                <div class="text d-flex flex-column">
+                    <span>Ricevi notifiche di nuovi messaggi</span>
+                    <a href="#">Attiva notifiche desktop</a>
                 </div>
+            </section>
 
-                <!-- utenti -->
+            <!-- search bar -->
+            <section class="search d-flex">
+                <button class="btn">
+                    <i class="fas fa-search"></i>
+                </button>
+                <input type="text"
+                       placeholder="Cerca o inizia una nuova chat" class="flex-grow-1"
+                       v-model.trim="searchInput"
+                       @keyup="filterContacts"
+                >
+            </section>
 
-                <div class="contactList">
-
-                    <!-- creo la lista con v-for -->
-                    <!-- setto il click come evento che rileva l'indice  -->
-                    <div v-for='(contact, index) in contacts' 
-                        @click="setActive(index)" 
-                        class="contact p-10 w-100 al-it-c"
-                        :class="{active: index === activeContact}">
-
-                    <img 
-                    class="avatar m-10" 
-                            :src="`./img/avatar${contact.avatar}.jpg`"
-                            alt="Avatar">
-
-                        <div class="nome-utente">
-                            <span class="fs-12">{{contact.name}}</span>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
+            <!-- contacts list -->
+            <section class="contacts">
+                <ul class="contacts-list">
+                    <li 
+                        class="contact d-flex align-items-center" 
+                        v-for="(contact, index) in contacts"
+                        @click="activeIndex = index" 
+                        :class="{active: index === activeIndex}"
+                        v-show="contact.visible"
+                    >
+                        <img :src="`./img/avatar${contact.avatar}.jpg`" :alt="contact.name" class="contact">
+                        <span>{{contact.name}}</span>
+                    </li>
+                </ul>
+            </section>
         </aside>
 
-
-        <!-- right -->
-        <section class="right">
-
-            <!-- Top bar -->
-            <div class="top">
-
-                <div class="top-left struttura">
-                    <img class="avatar m-10" 
-                        :src="`./img/avatar${contacts[activeContact].avatar}.jpg`" 
-                        :alt="contacts[activeContact].name">
-                    <div class="nome-utente">
-                        <span class="fs-12">{{contacts[activeContact].name}}</span>
-                        <span class="style">Ultimo accesso oggi alle 10.35</span>
+        <!-- MAIN -->
+        <main class="flex-grow-1 d-flex flex-column">
+            <!-- header user -->
+            <section class="header contact d-flex align-items-center">
+                <div class="contact-informations d-flex align-items-center">
+                    <img :src="`./img/avatar${contacts[activeIndex].avatar}.jpg`" :alt="`${contacts[activeIndex].name}`" class="contact">
+                    <div class="text d-flex flex-column">
+                        <span class="name">{{ contacts[activeIndex].name }}</span>
+                        <span class="last-access">Ultimo accesso: oggi alle 10.35</span>
                     </div>
                 </div>
-
-                <div class="top-right">
-                    <i class="fas fa-search icons"></i>
-                    <i class="fas fa-search icons"></i>
-                    <i class="fas fa-ellipsis-v icons"></i>
+                <div class="actions flex-grow-1 d-flex align-items-center justify-content-end">
+                    <i class="fas fa-search search"></i>
+                    <i class="fas fa-paperclip paperclip"></i>
+                    <i class="fas fa-ellipsis-v expand-actions"></i>
                 </div>
-            </div>
+            </section>
 
-
-
-            <!-- Messages section -->
-            <main>
-                <div class="message-container">
-
-                    <!-- entro nell'array 'contacts' con v-for così da poter prendere i contenuti degli oggetti al suo interno  -->
-
-                    <!-- 'status' lo prendo attaccando il suo valore come fosse una classe con v-bind -->
-
-                    <div v-for="message in contacts[activeContact].messages" 
-                        class="message" 
-                        :class="message.status">
-                        
-                        
-
-                        <div class="text-style">{{message.text}}</div>
-                        <div class="time">{{message.date}}</div>
-
-                    </div>    
+            <!-- message container -->
+            <section class="message-container overflow-auto flex-grow-1 d-flex flex-column">
+                <div 
+                    v-for="message in contacts[activeIndex].messages" class="message"
+                    :class="`${message.status}`">
+                    {{ message.text }}
+                    <span class="date">{{ message.date }}</span>
                 </div>
-            </main>
+            </section>
 
-
-
-            <!-- Footer -->
-            <footer class="footer">
-
-                <i class="fas fa-search icons"></i>
-                
-                <input type="label" 
-                    placeholder="Scrivi il tuo messaggio" 
-                    class="label d-grow"
-                    v-model.trim="newMessage"
-                    @keyup.enter="addNew"
-                >
-
-                <i class="fas fa-search icons"></i>
-
-            </footer>
-
-        </section>
-
-    </div>
-
-    <!-- DayJS -->
-    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.7/dayjs.min.js"></script>
-
+            <!-- footer console -->
+            <section class="footer console d-flex align-items-center">
+                <button class="btn">
+                    <i class="far fa-smile"></i>
+                </button>
+                <input 
+                    type="text" 
+                    placeholder="Scrivi un messaggio" 
+                    class="flex-grow-1"
+                    v-model.trim="newMessageText"
+                    @keyup.enter="addNewMessage()">
+                <button class="btn">
+                    <i class="fas fa-microphone"></i>
+                </button>
+            </section>
+        </main>
+    </section>
     <!-- JS -->
-    <script src="./JS/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.7/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.7/locale/it.js"></script>
+    <script src="./js/main.js"></script>
 </body>
-
 </html>
-
-
